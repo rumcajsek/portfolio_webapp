@@ -4,7 +4,10 @@ body {
 }
 
 #mainNavbar .navbar-brand {
-    color: #EA1C2C;
+    color: black;
+    font-family: "Shadows Into Light", cursive;
+    font-weight: 700;
+    font-style: normal;
 }
 
 #mainNavbar {
@@ -18,15 +21,10 @@ body {
 
 #mainNavbar .nav-link:hover {
     font-weight: 800;
-    drop
-}
-
-#headingGroup span {
-    color: #EA1C2C;
 }
 
 #mainNavbar.scrolled {
-    background: rgb(222,192,222);
+    background: darkred;
     transition: background 300ms;
 }
 
