@@ -5,6 +5,11 @@ $(function () {
     });
 });
 
+$("#navbarToggler").on("click", function () {
+    var $nav = $("#mainNavbar");
+    $nav.toggleClass("shadowed");
+});
+
 function greet() {
     alert("Hello, World!");
 }

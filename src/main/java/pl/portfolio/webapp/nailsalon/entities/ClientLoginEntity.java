@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "login_data")
+@Table(name = "client_login_data")
 public class ClientLoginEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

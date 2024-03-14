@@ -1,0 +1,61 @@
+body {
+    font-family: "Nunito", sans-serif;
+    background: lightpink;
+    margin-top: 3rem;
+}
+
+#mainNavbar .navbar-brand {
+    color: white;
+    font-family: "Shadows Into Light", cursive;
+    font-weight: 700;
+    font-style: normal;
+}
+
+#mainNavbar {
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+#mainNavbar .nav-link {
+    color: white;
+    transition: all 0.5s ease-in-out;
+}
+
+#mainNavbar .nav-link:hover {
+    font-weight: 800;
+}
+
+.navbar-custom {
+    background-color: transparent;
+}
+.navbar-custom .navbar-collapse {
+}
+
+#mainNavbar.scrolled {
+    background-color: hotpink;
+    opacity: 75%;
+    transition: background 300ms;
+}
+#mainNavbar.shadowed {
+    background-color: hotpink;
+    opacity: 75%;
+    transition: background 300ms;
+}
+
+.link-button {
+    border: 1px solid #000000;
+    border-radius: 10px;
+    color: black;
+    display: inline-block;
+    text-decoration: none;
+    margin:  25px 0;
+    padding: 15px 0;
+    justify-content: center;
+    transition: background-color 200ms ease-in-out;
+}
+
+.link-button:hover, .link-button:focus {
+    background-color: deeppink;
+    text-decoration: inherit;
+    color: inherit;
+}

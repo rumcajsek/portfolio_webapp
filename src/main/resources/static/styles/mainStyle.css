@@ -34,6 +34,13 @@ body {
 }
 
 #mainNavbar.scrolled {
+    background-color: #151515;
+    opacity: 75%;
+    transition: background 300ms;
+}
+#mainNavbar.shadowed {
+    background-color: #151515;
+    opacity: 75%;
     transition: background 300ms;
 }
 
