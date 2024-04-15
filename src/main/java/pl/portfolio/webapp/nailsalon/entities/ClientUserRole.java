@@ -5,19 +5,21 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
+import java.util.HashSet;
+import java.util.Set;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "clients")
-public class ClientEntity {
+@Entity
+@Table(name="client_user_role")
+public class ClientUserRole {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    private String surname;
-    @OneToOne(cascade = CascadeType.REMOVE,
-            fetch = FetchType.LAZY)
-    private ClientLoginEntity loginData;
+    private String description;
+    @ManyToMany(mappedBy = "userRoleSet")
+    private Set<ClientLoginEntity> clientEntitySet = new HashSet<>();
 
 }
