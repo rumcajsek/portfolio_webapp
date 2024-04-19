@@ -18,4 +18,29 @@ public class NailSalonController {
     public String getNailSalonSchedulePage() {
         return "schedule";
     }
+
+    @GetMapping("/clients")
+    public String getNailSalonClientPage() {
+        return "clients";
+    }
+
+    @GetMapping("/prices")
+    public String getNailSalonPricesPage() {
+        return "prices";
+    }
+
+    @GetMapping("/services")
+    public String getNailSalonServicesPage() {
+        return "services";
+    }
+
+    @GetMapping("/about")
+    public String getNailSalonAboutPage() {
+        return "about";
+    }
+
+    @GetMapping("/gallery")
+    public String getNailSalonGalleryPage() {
+        return "gallery";
+    }
 }
