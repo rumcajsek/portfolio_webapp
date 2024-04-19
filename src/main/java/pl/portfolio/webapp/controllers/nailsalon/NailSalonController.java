@@ -43,4 +43,9 @@ public class NailSalonController {
     public String getNailSalonGalleryPage() {
         return "gallery";
     }
+
+    @GetMapping("/someRequest")
+    public String getSomePage() {
+        return "dummyPage";
+    }
 }
