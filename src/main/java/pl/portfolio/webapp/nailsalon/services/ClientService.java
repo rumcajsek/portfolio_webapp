@@ -1,25 +1,37 @@
 package pl.portfolio.webapp.nailsalon.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.portfolio.webapp.nailsalon.entities.ClientEntity;
 import pl.portfolio.webapp.nailsalon.entities.ClientLoginEntity;
 import pl.portfolio.webapp.nailsalon.entities.ClientToAddDto;
 import pl.portfolio.webapp.nailsalon.repositories.ClientEntityRepository;
+import pl.portfolio.webapp.nailsalon.repositories.ClientLoginEntityRepository;
 
 import java.util.List;
 
 @Service
 public class ClientService {
-    ClientEntityRepository clientEntityRepository;
+    private final ClientEntityRepository clientEntityRepository;
+    private final ClientLoginEntityRepository clientLoginEntityRepository;
 
-    public ClientService(ClientEntityRepository clientEntityRepository) {
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    public ClientService(ClientEntityRepository clientEntityRepository, ClientLoginEntityRepository clientLoginEntityRepository) {
         this.clientEntityRepository = clientEntityRepository;
+        this.clientLoginEntityRepository = clientLoginEntityRepository;
     }
 
     public List<ClientEntity> getAllClientsList() {
         return clientEntityRepository.findAll();
     }
 
+    @Transactional
     public void addClientFullData(ClientToAddDto clientToAddDto) {
         ClientEntity clientEntity = new ClientEntity(
                 clientToAddDto.getName(),
@@ -28,8 +40,13 @@ public class ClientService {
 
         ClientLoginEntity clientLoginEntity = new ClientLoginEntity(
                 clientToAddDto.getEmail(),
-                clientToAddDto.getPassword()
+                passwordEncoder.encode(clientToAddDto.getPassword())
         );
 
+        clientEntity.setLoginData(clientLoginEntity);
+
+        clientLoginEntityRepository.save(clientLoginEntity);
+        clientEntityRepository.save(clientEntity);
     }
+
 }
