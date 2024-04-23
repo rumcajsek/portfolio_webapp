@@ -9,19 +9,13 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "clients")
-public class ClientEntity {
+@Table(name = "services")
+public class ServicesEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    private String surname;
-    @OneToOne(cascade = CascadeType.REMOVE,
-            fetch = FetchType.LAZY)
-    private ClientLoginEntity loginData;
-
-    public ClientEntity(String name, String surname) {
-        this.name = name;
-        this.surname = surname;
-    }
+    private String description;
+    private float duration;
+    private float cost;
 }

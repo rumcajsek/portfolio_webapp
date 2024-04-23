@@ -26,4 +26,9 @@ public class ClientLoginEntity {
             inverseJoinColumns = @JoinColumn(table = "client_user_role", referencedColumnName = "id")
     )
     private Set<ClientUserRole> userRoleSet = new HashSet<>();
+
+    public ClientLoginEntity(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
 }
