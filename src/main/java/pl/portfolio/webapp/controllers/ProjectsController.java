@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ProjectsController {
     @GetMapping("/nailSalon")
     public String getNailSalon() {
+        log.info("Nail salon selected");
         return "nailSalon";
     }
 }

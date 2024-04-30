@@ -1,5 +1,6 @@
 package pl.portfolio.webapp.nailsalon.services;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
@@ -32,7 +33,7 @@ public class ClientService {
     }
 
     @Transactional
-    public void addClientFullData(ClientToAddDto clientToAddDto) {
+    public void addClientFullData(@NotNull ClientToAddDto clientToAddDto) {
         ClientEntity clientEntity = new ClientEntity(
                 clientToAddDto.getName(),
                 clientToAddDto.getSurname()

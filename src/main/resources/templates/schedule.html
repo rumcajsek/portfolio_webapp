@@ -16,6 +16,7 @@
           crossorigin="anonymous">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../static/styles/nailSalonStyle.css" th:href="@{/styles/nailSalonStyle.css}">
+    <link rel="stylesheet" href="../static/styles/scheduleStyle.css" th:href="@{/styles/scheduleStyle.css}">
     <base href="/projects/nailSalon/">
 
 </head>
@@ -42,29 +43,37 @@
         </ul>
     </div>
 </nav>
-<!--<section class="container-fluid px-5 py-3">-->
-<!--    <div class="row align-items-center">-->
-<!--        <a href="schedule" class="col-10 col-md-6 col-xl-4 mx-auto justify-content-center text-center text-white link-button">Schedule a visit</a>-->
-<!--    </div>-->
-<!--    <div class="row align-items-center">-->
-<!--        <a href="#" class="col-10 col-md-6 col-xl-4 mx-auto justify-content-center text-center text-white link-button">Clients</a>-->
-<!--    </div>-->
-<!--    <div class="row align-items-center">-->
-<!--        <a href="#" class="col-10 col-md-6 col-xl-4 mx-auto justify-content-center text-center text-white link-button">Prices</a>-->
-<!--    </div>-->
-<!--    <div class="row align-items-center">-->
-<!--        <a href="#" class="col-10 col-md-6 col-xl-4 mx-auto justify-content-center text-center text-white link-button">Services Description</a>-->
-<!--    </div>-->
-<!--    <div class="row align-items-center">-->
-<!--        <a href="#" class="col-10 col-md-6 col-xl-4 mx-auto justify-content-center text-center text-white link-button">About</a>-->
-<!--    </div>-->
-<!--    <div class="row align-items-center">-->
-<!--        <a href="#" class="col-10 col-md-6 col-xl-4 mx-auto justify-content-center text-center text-white link-button">Gallery</a>-->
-<!--    </div>-->
-<!--    <div class="row align-items-center">-->
-<!--        <a href="#" class="col-10 col-md-6 col-xl-4 mx-auto justify-content-center text-center text-white link-button">Contact</a>-->
-<!--    </div>-->
-<!--</section>-->
+<h1 th:text="${title}"></h1>
+<table class="calendar">
+    <thead>
+        <tr class="calendar-row">
+            <th>Mon</th>
+            <th>Tue</th>
+            <th>Wed</th>
+            <th>Thu</th>
+            <th>Fri</th>
+            <th>Sat</th>
+            <th>Sun</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Generate calendar grid -->
+        <tr th:each="week : ${calendar}" class="calendar-row">
+            <th:block th:each="day : ${week}">
+                <td th:if="${day}"  class="day-cell">
+                    <span class="day-number" th:text="${day.getDayOfMonth()}"></span>
+<!--                    <div class="appointments">-->
+                        <div class="appointment" th:each="appointment : ${appointments}"
+                             th:if="${appointment.date.toLocalDate().isEqual(day.toLocalDate())}"
+                             th:text="|${appointment.date.toLocalTime().toString()} - ${appointment.title}|">
+                        </div>
+<!--                    </div>-->
+                </td>
+                <td th:unless="${day}" class="empty-day-cell"></td>
+            </th:block>
+        </tr>
+    </tbody>
+</table>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
