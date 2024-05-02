@@ -62,18 +62,26 @@
             <th:block th:each="day : ${week}">
                 <td th:if="${day}"  class="day-cell">
                     <span class="day-number" th:text="${day.getDayOfMonth()}"></span>
-<!--                    <div class="appointments">-->
-                        <div class="appointment" th:each="appointment : ${appointments}"
-                             th:if="${appointment.date.toLocalDate().isEqual(day.toLocalDate())}"
-                             th:text="|${appointment.date.toLocalTime().toString()} - ${appointment.title}|">
-                        </div>
-<!--                    </div>-->
+                    <div class="appointment" id="appointment-box" th:each="appointment : ${appointmentEntities}"
+                         th:if="${appointment.date.toLocalDate().isEqual(day.toLocalDate())}"
+                         th:text="|${appointment.date.toLocalTime().toString()} - ${appointment.title}|"
+                         th:onclick="openModal(/*[(${#json.stringify(appointment)})]*/)">
+                    </div>
                 </td>
                 <td th:unless="${day}" class="empty-day-cell"></td>
             </th:block>
         </tr>
     </tbody>
 </table>
+
+<div id="appointment-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div id="appointment-details">
+            <!-- Person details will be dynamically added here -->
+        </div>
+    </div>
+</div>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -84,6 +92,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
 <script src="../static/scripts/mainScript.js" th:src="@{/scripts/mainScript.js}"></script>
+<script src="../static/scripts/calendarScript.js" th:src="@{/scripts/calendarScript.js}"></script>
 
 </body>
 </html>
