@@ -1,5 +1,7 @@
 package pl.portfolio.webapp.controllers.nailsalon;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,7 @@ import pl.portfolio.webapp.nailsalon.services.ClientService;
 
 import java.time.LocalDateTime;
 import java.time.format.TextStyle;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -29,7 +32,15 @@ public class NailSalonController {
 
     @GetMapping("/schedule")
     public String getNailSalonSchedulePage(Model model) {
-        List<AppointmentEntity> appointmentEntities = appointmentService.getAppointmentList();
+        //List<AppointmentEntity> appointmentEntities = appointmentService.getAppointmentList();
+        List<Appointment> appointmentEntities = new ArrayList<>();
+
+        appointmentEntities.add(new Appointment("Masniczka", LocalDateTime.of(2024,6,22,14,15)));
+        appointmentEntities.add(new Appointment("Szkolenie podologiczne", LocalDateTime.of(2024,6,19,9,15)));
+        appointmentEntities.add(new Appointment("Kasia", LocalDateTime.of(2024,6,22,16,15)));
+        appointmentEntities.add(new Appointment("Asia", LocalDateTime.of(2024,6,22,18,15)));
+        appointmentEntities.add(new Appointment("Basia", LocalDateTime.of(2024, 6, 25, 14, 0)));
+        appointmentEntities.add(new Appointment("SZKOLENIE PEDI", LocalDateTime.of(2024, 6, 28, 10, 30)));
         LocalDateTime currentDate = LocalDateTime.now();
         currentDate = currentDate.plusMonths(1);
         //List<List<LocalDateTime>> calendar = appointmentService.getCurrentMonthCalendar();
@@ -119,5 +130,12 @@ public class NailSalonController {
     @GetMapping("/someRequest")
     public String getSomePage() {
         return "dummyPage";
+    }
+
+    @Data
+    @AllArgsConstructor
+    public static class Appointment {
+        private String title;
+        private LocalDateTime date;
     }
 }

@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import pl.portfolio.webapp.nailsalon.entities.ClientToAddDto;
+import pl.portfolio.webapp.nailsalon.entities.dtos.ClientToAddDto;
 import pl.portfolio.webapp.nailsalon.services.ClientService;
 
 @Controller

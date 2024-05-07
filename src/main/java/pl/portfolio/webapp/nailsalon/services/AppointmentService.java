@@ -27,7 +27,6 @@ public class AppointmentService {
 
     public List<List<LocalDateTime>> getCurrentMonthCalendar() {
         LocalDateTime currentDate = LocalDateTime.now(ZoneId.systemDefault());
-
         return getCalendarForGivenMonth(currentDate);
     }
 

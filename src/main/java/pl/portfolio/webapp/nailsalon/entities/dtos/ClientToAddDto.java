@@ -1,4 +1,4 @@
-package pl.portfolio.webapp.nailsalon.entities;
+package pl.portfolio.webapp.nailsalon.entities.dtos;
 
 import lombok.Data;
 

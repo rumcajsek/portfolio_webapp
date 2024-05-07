@@ -2,14 +2,12 @@ package pl.portfolio.webapp.nailsalon.services;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.portfolio.webapp.nailsalon.entities.ClientEntity;
 import pl.portfolio.webapp.nailsalon.entities.ClientLoginEntity;
-import pl.portfolio.webapp.nailsalon.entities.ClientToAddDto;
+import pl.portfolio.webapp.nailsalon.entities.dtos.ClientToAddDto;
 import pl.portfolio.webapp.nailsalon.repositories.ClientEntityRepository;
 import pl.portfolio.webapp.nailsalon.repositories.ClientLoginEntityRepository;
 

@@ -62,10 +62,9 @@
             <th:block th:each="day : ${week}">
                 <td th:if="${day}"  class="day-cell">
                     <span class="day-number" th:text="${day.getDayOfMonth()}"></span>
-                    <div class="appointment" id="appointment-box" th:each="appointment : ${appointmentEntities}"
+                    <div class="appointment" th:each="appointment : ${appointments}"
                          th:if="${appointment.date.toLocalDate().isEqual(day.toLocalDate())}"
-                         th:text="|${appointment.date.toLocalTime().toString()} - ${appointment.title}|"
-                         th:onclick="openModal(/*[(${#json.stringify(appointment)})]*/)">
+                         th:text="|${appointment.date.toLocalTime().toString()} - ${appointment.title}|">
                     </div>
                 </td>
                 <td th:unless="${day}" class="empty-day-cell"></td>
