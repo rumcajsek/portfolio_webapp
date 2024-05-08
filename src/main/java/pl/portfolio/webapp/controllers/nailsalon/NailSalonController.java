@@ -35,16 +35,17 @@ public class NailSalonController {
         //List<AppointmentEntity> appointmentEntities = appointmentService.getAppointmentList();
         List<Appointment> appointmentEntities = new ArrayList<>();
 
-        appointmentEntities.add(new Appointment("Masniczka", LocalDateTime.of(2024,6,22,14,15)));
-        appointmentEntities.add(new Appointment("Szkolenie podologiczne", LocalDateTime.of(2024,6,19,9,15)));
-        appointmentEntities.add(new Appointment("Kasia", LocalDateTime.of(2024,6,22,16,15)));
-        appointmentEntities.add(new Appointment("Asia", LocalDateTime.of(2024,6,22,18,15)));
-        appointmentEntities.add(new Appointment("Basia", LocalDateTime.of(2024, 6, 25, 14, 0)));
-        appointmentEntities.add(new Appointment("SZKOLENIE PEDI", LocalDateTime.of(2024, 6, 28, 10, 30)));
+        appointmentEntities.add(new Appointment(1L, "Masniczka", LocalDateTime.of(2024,6,22,14,15)));
+        appointmentEntities.add(new Appointment(2L, "Szkolenie podologiczne", LocalDateTime.of(2024,6,19,9,15)));
+        appointmentEntities.add(new Appointment(3L, "Kasia", LocalDateTime.of(2024,6,22,16,15)));
+        appointmentEntities.add(new Appointment(4L, "Asia", LocalDateTime.of(2024,6,22,18,15)));
+        appointmentEntities.add(new Appointment(5L, "Basia", LocalDateTime.of(2024, 6, 25, 14, 0)));
+        appointmentEntities.add(new Appointment(6L, "SZKOLENIE PEDI", LocalDateTime.of(2024, 6, 28, 10, 30)));
         LocalDateTime currentDate = LocalDateTime.now();
         currentDate = currentDate.plusMonths(1);
         //List<List<LocalDateTime>> calendar = appointmentService.getCurrentMonthCalendar();
         List<List<LocalDateTime>> calendar = appointmentService.getCalendarForGivenMonth(currentDate); // TODO: Remove, only for testing purpose, uncomment line above.
+
 
         model.addAttribute("calendar", calendar);
         model.addAttribute("title", "My Calendar - " + currentDate.getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH));
@@ -135,6 +136,7 @@ public class NailSalonController {
     @Data
     @AllArgsConstructor
     public static class Appointment {
+        private Long id;
         private String title;
         private LocalDateTime date;
     }

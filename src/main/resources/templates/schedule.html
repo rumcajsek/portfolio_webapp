@@ -62,9 +62,10 @@
             <th:block th:each="day : ${week}">
                 <td th:if="${day}"  class="day-cell">
                     <span class="day-number" th:text="${day.getDayOfMonth()}"></span>
-                    <div class="appointment" th:each="appointment : ${appointments}"
-                         th:if="${appointment.date.toLocalDate().isEqual(day.toLocalDate())}"
-                         th:text="|${appointment.date.toLocalTime().toString()} - ${appointment.title}|">
+                    <div class="appointment" th:each="singleAppointment : ${appointments}"
+                         th:if="${singleAppointment.date.toLocalDate().isEqual(day.toLocalDate())}">
+                        <a href="javascript:void(0)" th:onclick="openModal(/*[[${singleAppointment}]]*/)" 
+                           th:text="|${singleAppointment.date.toLocalTime().toString()} - ${singleAppointment.title}|"></a>
                     </div>
                 </td>
                 <td th:unless="${day}" class="empty-day-cell"></td>
@@ -75,10 +76,10 @@
 
 <div id="appointment-modal" class="modal">
     <div class="modal-content">
-        <span class="close">&times;</span>
         <div id="appointment-details">
             <!-- Person details will be dynamically added here -->
         </div>
+        <span class="close">&times</span>
     </div>
 </div>
 

@@ -8,6 +8,10 @@ table {
     margin: 0 10%;
 }
 
+a {
+    text-decoration: none;
+}
+
 .calendar th, .calendar td {
     min-height: 80px;
     text-align: center;
@@ -72,6 +76,7 @@ table {
     padding: 0.1rem 0.5rem;
     font-size: 13px;
     text-align: left;
+    text-decoration: none;
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 1;
@@ -80,6 +85,7 @@ table {
 
 .day-cell:has(.appointment):hover {
     background-color: #e1daf0cc;
+    text-decoration: none;
     overflow: unset !important;
     flex-grow: 1 !important;
     padding: 1.5rem 0.75rem 0 0.75rem;
@@ -89,6 +95,11 @@ table {
     display: block;
     -webkit-line-clamp: unset;
     -webkit-box-orient: unset;
+    text-decoration: none;
     overflow: unset !important;
     white-space: nowrap;
+}
+
+#appointment-link {
+    text-decoration: none;
 }

@@ -10,13 +10,23 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+function foo(bar) {
+    alert('Inside foo(bar)');
+    console.log(bar);
+    console.log('after bar');
+}
+
 // Function to open modal with detailed person info
 function openModal(appointment) {
+    console.log(appointment);
+    console.log(appointment.id);
+    console.log(appointment.title);
+    console.log(appointment.date);
     const modal = document.getElementById('appointment-modal');
     const modalContent = document.getElementById('appointment-details');
     modalContent.innerHTML = `
-        <p><strong>Name:</strong> ${appointment.name}</p>
-        <p><strong>Surname:</strong> ${appointment.date.toLocalTime().toString()}</p>
+        <p><strong>Name:</strong> ${appointment.title}</p>
+        <p><strong>Surname:</strong> ${appointment.date}</p>
     `;
     modal.style.display = 'block';
 }
