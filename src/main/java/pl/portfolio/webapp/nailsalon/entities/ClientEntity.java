@@ -16,9 +16,6 @@ public class ClientEntity {
     private Long id;
     private String name;
     private String surname;
-    @OneToOne(cascade = CascadeType.REMOVE,
-            fetch = FetchType.LAZY)
-    private ClientLoginEntity loginData;
 
     public ClientEntity(String name, String surname) {
         this.name = name;

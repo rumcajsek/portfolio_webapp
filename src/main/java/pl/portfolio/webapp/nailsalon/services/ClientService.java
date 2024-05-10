@@ -31,8 +31,8 @@ public class ClientService {
         this.clientUserRoleRepository = clientUserRoleRepository;
     }
 
-    public List<ClientEntity> getAllClientsList() {
-        return clientEntityRepository.findAll();
+    public List<ClientLoginEntity> getAllClientsList() {
+        return clientLoginEntityRepository.findAll();
     }
 
     @Transactional
@@ -46,9 +46,8 @@ public class ClientService {
                 clientToAddDto.getEmail(),
                 passwordEncoder.encode(clientToAddDto.getPassword())
         );
-        clientLoginEntity.setUserRoleSet(Set.of(clientUserRoleRepository.findByName("USER").orElse(new ClientUserRole("USER", "dummy"))));
-
-        clientEntity.setLoginData(clientLoginEntity);
+        clientLoginEntity.setUserRoleSet(Set.of(clientUserRoleRepository.findByName("USER").orElse(new ClientUserRole(1L,"USER", "dummy"))));
+        clientLoginEntity.setClientData(clientEntity);
 
         clientLoginEntityRepository.save(clientLoginEntity);
         clientEntityRepository.save(clientEntity);

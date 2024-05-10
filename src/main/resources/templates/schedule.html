@@ -41,8 +41,8 @@
                 <a href="/projects" class="nav-link active">PROJECTS</a>
             </li>
             <li class="nav-item">
-                <h3 class="header-h3 login-func"><a sec:authorize="!isAuthenticated()" th:text="|Zaloguj się|"></a></h3>
-                <h3 class="header-h3 login-func" sec:authorize="isAuthenticated()" th:text="|Witaj ${#authentication.name}|"></h3>
+                <a class="nav-link" sec:authorize="!isAuthenticated()" th:text="|Zaloguj się|" th:href="@{/login}"></a>
+                <p class="nav-link" sec:authorize="isAuthenticated()" th:text="|Witaj ${#authentication.name}|"></p>
             </li>
         </ul>
     </div>

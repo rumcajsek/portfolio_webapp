@@ -19,6 +19,9 @@ public class ClientLoginEntity {
     private Long id;
     private String email;
     private String password;
+    @OneToOne(cascade = CascadeType.REMOVE,
+            fetch = FetchType.LAZY)
+    private ClientEntity clientData;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "client_to_user_role",
