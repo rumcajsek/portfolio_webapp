@@ -9,6 +9,7 @@ import pl.portfolio.webapp.nailsalon.entities.ClientEntity;
 import pl.portfolio.webapp.nailsalon.entities.ClientLoginEntity;
 import pl.portfolio.webapp.nailsalon.entities.ClientUserRole;
 import pl.portfolio.webapp.nailsalon.entities.dtos.ClientToAddDto;
+import pl.portfolio.webapp.nailsalon.exceptions.NoUserRoleFoundException;
 import pl.portfolio.webapp.nailsalon.repositories.ClientEntityRepository;
 import pl.portfolio.webapp.nailsalon.repositories.ClientLoginEntityRepository;
 import pl.portfolio.webapp.nailsalon.repositories.ClientUserRoleRepository;
@@ -46,7 +47,7 @@ public class ClientService {
                 clientToAddDto.getEmail(),
                 passwordEncoder.encode(clientToAddDto.getPassword())
         );
-        clientLoginEntity.setUserRoleSet(Set.of(clientUserRoleRepository.findByName("USER").orElse(new ClientUserRole(1L,"USER", "dummy"))));
+        clientLoginEntity.setUserRoleSet(Set.of(clientUserRoleRepository.findByName("USER").orElseThrow(NoUserRoleFoundException::new)));
         clientLoginEntity.setClientData(clientEntity);
 
         clientLoginEntityRepository.save(clientLoginEntity);
