@@ -26,5 +26,10 @@ public class MainController {
     public String getCurriculumPage() {
         return "cv";
     }
+
+    @GetMapping("/login")
+    public String getLoginPage() {
+        return "login";
+    }
 }
 

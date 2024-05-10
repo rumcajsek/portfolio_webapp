@@ -40,6 +40,10 @@
             <li class="nav-item">
                 <a href="/projects" class="nav-link active">PROJECTS</a>
             </li>
+            <li class="nav-item">
+                <h3 class="header-h3 login-func"><a sec:authorize="!isAuthenticated()" th:text="|Zaloguj się|"></a></h3>
+                <h3 class="header-h3 login-func" sec:authorize="isAuthenticated()" th:text="|Witaj ${#authentication.name}|"></h3>
+            </li>
         </ul>
     </div>
 </nav>
@@ -64,7 +68,7 @@
                     <span class="day-number" th:text="${day.getDayOfMonth()}"></span>
                     <div class="appointment" th:each="singleAppointment : ${appointments}"
                          th:if="${singleAppointment.date.toLocalDate().isEqual(day.toLocalDate())}">
-                        <a href="javascript:void(0)" th:onclick="openModal(/*[[${singleAppointment}]]*/)" 
+                        <a href="javascript:void(0)" th:onclick="openModal(/*[[${singleAppointment}]]*/)"
                            th:text="|${singleAppointment.date.toLocalTime().toString()} - ${singleAppointment.title}|"></a>
                     </div>
                 </td>

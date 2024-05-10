@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import pl.portfolio.webapp.nailsalon.entities.ClientLoginEntity;
 import pl.portfolio.webapp.nailsalon.entities.dtos.ClientLoginEntityDto;
 
 @Service
@@ -22,7 +23,7 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException(String.format("User with email %s not found", username)));
     }
 
-    private UserDetails createUserDetails(ClientLoginEntityDto credentials) {
+    private UserDetails createUserDetails(ClientLoginEntity credentials) {
         return User.builder()
                 .username(credentials.getEmail())
                 .password(credentials.getPassword())

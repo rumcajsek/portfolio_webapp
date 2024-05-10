@@ -22,4 +22,9 @@ public class ClientUserRole {
     @ManyToMany(mappedBy = "userRoleSet")
     private Set<ClientLoginEntity> clientEntitySet = new HashSet<>();
 
+    public ClientUserRole(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
 }
