@@ -46,7 +46,7 @@ public class ClientService {
                 clientToAddDto.getEmail(),
                 passwordEncoder.encode(clientToAddDto.getPassword())
         );
-        clientLoginEntity.setUserRoleSet(Set.of(clientUserRoleRepository.findByName("USER")));
+        clientLoginEntity.setUserRoleSet(Set.of(clientUserRoleRepository.findByName("USER").orElse(new ClientUserRole("USER", "dummy"))));
 
         clientEntity.setLoginData(clientLoginEntity);
 

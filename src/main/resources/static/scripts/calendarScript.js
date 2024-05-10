@@ -1,14 +1,14 @@
-document.addEventListener("DOMContentLoaded", function() {
-    // Attach click event listener to close button
-    document.querySelector('.close').addEventListener('click', closeModal);
-
-    // Attach click event listener to modal overlay to close modal
-    document.getElementById('appointment-modal').addEventListener('click', function(event) {
-        if (event.target === this) {
-            closeModal();
-        }
-    });
-});
+// document.addEventListener("DOMContentLoaded", function() {
+//     // Attach click event listener to close button
+//     document.querySelector('.close').addEventListener('click', closeModal);
+//
+//     // Attach click event listener to modal overlay to close modal
+//     document.getElementById('appointment-modal').addEventListener('click', function(event) {
+//         if (event.target === this) {
+//             closeModal();
+//         }
+//     });
+// });
 
 function foo(bar) {
     alert('Inside foo(bar)');
@@ -22,16 +22,16 @@ function openModal(appointment) {
     console.log(appointment.id);
     console.log(appointment.title);
     console.log(appointment.date);
-    const modal = document.getElementById('appointment-modal');
+    //const modal = document.getElementById('appointment-modal');
     const modalContent = document.getElementById('appointment-details');
     modalContent.innerHTML = `
         <p><strong>Name:</strong> ${appointment.title}</p>
         <p><strong>Surname:</strong> ${appointment.date}</p>
     `;
-    modal.style.display = 'block';
+    $('#exampleModal').modal('show');
 }
 
 // Function to close the modal
 function closeModal() {
-    document.getElementById('appointment-modal').style.display = 'none';
+    document.getElementById('exampleModal').style.display = 'none';
 }
