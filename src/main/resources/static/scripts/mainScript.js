@@ -23,3 +23,13 @@ $(document).ready(function () {
 function greet() {
     alert("Hello, World!");
 }
+
+function goBackOneLevel() {
+    // Get the current URL
+    var currentUrl = window.location.href;
+    // Find the last occurrence of "/"
+    var lastSlashIndex = currentUrl.lastIndexOf("/");
+    // Extract the base URL up to the last slash
+    // Navigate to the base URL
+    window.location.href = currentUrl.substring(0, lastSlashIndex);
+}

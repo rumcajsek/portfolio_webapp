@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import pl.portfolio.webapp.nailsalon.entities.AppointmentEntity;
 import pl.portfolio.webapp.nailsalon.entities.ClientEntity;
 import pl.portfolio.webapp.nailsalon.entities.ClientLoginEntity;
+import pl.portfolio.webapp.nailsalon.entities.dtos.ClientToAddDto;
 import pl.portfolio.webapp.nailsalon.services.AppointmentService;
 import pl.portfolio.webapp.nailsalon.services.ClientService;
 
@@ -57,6 +58,7 @@ public class NailSalonController {
     @GetMapping("/clients")
     public String getNailSalonClientPage(Model model) {
         List<ClientLoginEntity> clientEntityList = clientService.getAllClientsList();
+        model.addAttribute("clientToAdd", new ClientToAddDto());
         model.addAttribute("clientList", clientEntityList);
         return "clients";
     }

@@ -18,13 +18,7 @@ public class NailSalonClientsController {
         this.clientService = clientService;
     }
 
-    @GetMapping("/clientsAddClient")
-    public String getNailSalonAddClientPage(Model model) {
-        model.addAttribute("clientToAdd", new ClientToAddDto());
-        return "clientsAddClient";
-    }
-
-    @PostMapping(value = "/clientsAddClient/addClient")
+    @PostMapping(value = "/addClient")
     public ResponseEntity<?> addUser(@ModelAttribute ClientToAddDto clientToAddDto) {
         try {
             clientService.addClientFullData(clientToAddDto);
