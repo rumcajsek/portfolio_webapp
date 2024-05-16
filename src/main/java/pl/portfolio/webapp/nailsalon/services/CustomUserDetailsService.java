@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import pl.portfolio.webapp.nailsalon.entities.ClientLoginEntity;
+import pl.portfolio.webapp.nailsalon.entities.ClientUserRole;
 import pl.portfolio.webapp.nailsalon.entities.dtos.ClientLoginEntityDto;
 
 @Service
@@ -27,7 +28,9 @@ public class CustomUserDetailsService implements UserDetailsService {
         return User.builder()
                 .username(credentials.getClientData().getName())
                 .password(credentials.getPassword())
-                .roles(credentials.getUserRoleSet().toArray(String[]::new))
+                .roles(credentials.getUserRoleSet().stream()
+                        .map(ClientUserRole::getName)
+                        .toArray(String[]::new))
                 .build();
     }
 }

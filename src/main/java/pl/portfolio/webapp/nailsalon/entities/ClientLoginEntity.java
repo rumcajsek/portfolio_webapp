@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,22 +14,24 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "client_login_data")
-public class ClientLoginEntity {
+public class ClientLoginEntity implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String email;
     private String password;
     @OneToOne(cascade = CascadeType.REMOVE,
             fetch = FetchType.LAZY)
     private ClientEntity clientData;
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = ClientUserRole.class,
+                fetch = FetchType.EAGER,
+                cascade = CascadeType.ALL)
     @JoinTable(
             name = "client_to_user_role",
             joinColumns = @JoinColumn(table = "client_login_data", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(table = "client_user_role", referencedColumnName = "id")
     )
-    private Set<ClientUserRole> userRoleSet = new HashSet<>();
+    private Set<ClientUserRole> userRoleSet;
 
     public ClientLoginEntity(String email, String password) {
         this.email = email;

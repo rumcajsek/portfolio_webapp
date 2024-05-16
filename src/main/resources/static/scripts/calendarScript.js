@@ -17,21 +17,36 @@ function foo(bar) {
 }
 
 // Function to open modal with detailed person info
-function openModal(appointment) {
+function openAppointmentModal(appointment) {
+    event.stopPropagation();
     console.log(appointment);
     console.log(appointment.id);
     console.log(appointment.title);
     console.log(appointment.date);
-    //const modal = document.getElementById('appointment-modal');
     const modalContent = document.getElementById('appointment-details');
     modalContent.innerHTML = `
         <p><strong>Name:</strong> ${appointment.title}</p>
         <p><strong>Surname:</strong> ${appointment.date}</p>
     `;
-    $('#exampleModal').modal('show');
+    $('#appointmentModal').modal('show');
+}
+
+// Function to open modal with detailed person info
+function openScheduleModal(day) {
+    console.log(day);
+    const modalContent = document.getElementById('schedule-appointment-details');
+    modalContent.innerHTML = `
+        <p><strong>Day:</strong> ${day}</p>
+    `;
+    $('#scheduleModal').modal('show');
 }
 
 // Function to close the modal
-function closeModal() {
-    document.getElementById('exampleModal').style.display = 'none';
+function closeAppointmentModal() {
+    document.getElementById('appointmentModal').style.display = 'none';
+}
+
+// Function to close the modal
+function closeAppointmentModal() {
+    document.getElementById('scheduleModal').style.display = 'none';
 }
