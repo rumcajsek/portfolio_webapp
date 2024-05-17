@@ -5,6 +5,7 @@ import pl.portfolio.webapp.nailsalon.entities.ClientLoginEntity;
 import pl.portfolio.webapp.nailsalon.entities.dtos.ClientLoginEntityDto;
 import pl.portfolio.webapp.nailsalon.repositories.ClientLoginEntityRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,5 +18,9 @@ public class ClientLoginService {
 
     public Optional<ClientLoginEntity> findCredentialsByEmail(String email) {
         return clientLoginEntityRepository.findByEmailIgnoreCase(email);
+    }
+    
+    public Optional<ClientLoginEntity> findConstantID() {
+        return clientLoginEntityRepository.findById(1L);
     }
 }

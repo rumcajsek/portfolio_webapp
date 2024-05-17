@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.portfolio.webapp.nailsalon.entities.ClientEntity;
 import pl.portfolio.webapp.nailsalon.entities.ClientLoginEntity;
-import pl.portfolio.webapp.nailsalon.entities.ClientUserRole;
 import pl.portfolio.webapp.nailsalon.entities.dtos.ClientToAddDto;
 import pl.portfolio.webapp.nailsalon.exceptions.NoUserRoleFoundException;
 import pl.portfolio.webapp.nailsalon.repositories.ClientEntityRepository;
