@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-      xmlns="http://www.w3.org/1999/html">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>Jakub Król - Portfolio</title>
     <!-- Required meta tags -->
@@ -17,8 +16,7 @@
           crossorigin="anonymous">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../static/styles/nailSalonStyle.css" th:href="@{/styles/nailSalonStyle.css}">
-    <base href="/projects/nailSalon/">
-
+    <base href="/projects/nailSalon/prices">
 </head>
 <body>
 <nav id="mainNavbar" class="navbar navbar-dark navbar-expand-md py-0 fixed-top navbar-custom">
@@ -43,38 +41,27 @@
         </ul>
     </div>
 </nav>
+<h1 class="text-center text-white">Prices</h1>
 <section class="container-fluid px-5 py-3">
-    <div class="row align-items-center" sec:authorize="!isAuthenticated()">
-        <a class="col-10 col-md-6 col-xl-4 mx-auto justify-content-center text-center text-white link-button"
-           th:text="|Zaloguj się|" th:href="@{/login}"></a>
-    </div>
-    <div class="row align-items-center" sec:authorize="isAuthenticated()">
-        <span class="col-10 col-md-6 col-xl-4 mx-auto justify-content-center text-center text-white link-button">
-            <p class="text-white"
-               style="white-space: pre"
-               th:text="|Zalogowany jako ${#authentication.getName()}|" th:href="@{/logout}"></p>
-            <a class="undecorated-link text-white" th:href="@{/logout}" th:text="|Wyloguj się|"></a>
-        </span>
-    </div>
-    <div class="row align-items-center">
-        <a href="schedule" class="col-10 col-md-6 col-xl-4 mx-auto justify-content-center text-center text-white link-button">Schedule a visit</a>
-    </div>
-    <div class="row align-items-center">
-        <a href="clients" class="col-10 col-md-6 col-xl-4 mx-auto justify-content-center text-center text-white link-button">Clients</a>
-    </div>
-    <div class="row align-items-center">
-        <a href="services" class="col-10 col-md-6 col-xl-4 mx-auto justify-content-center text-center text-white link-button">Services Description</a>
-    </div>
-    <div class="row align-items-center">
-        <a href="about" class="col-10 col-md-6 col-xl-4 mx-auto justify-content-center text-center text-white link-button">About</a>
-    </div>
-    <div class="row align-items-center">
-        <a href="gallery" class="col-10 col-md-6 col-xl-4 mx-auto justify-content-center text-center text-white link-button">Gallery</a>
-    </div>
-    <div class="row align-items-center">
-        <a href="contact" class="col-10 col-md-6 col-xl-4 mx-auto justify-content-center text-center text-white link-button">Contact</a>
+    <div class="row align-items-center" th:if="${servicesList}">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Name</th><th>Description</th><th>Duration</th><th>Cost</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="service : ${servicesList}">
+                    <td th:text="${service.name}">Name</td>
+                    <td th:text="|${service.description}|">Desc</td>
+                    <td th:text="|${service.duration}h|">Duration</td>
+                    <td th:text="|${service.cost} zł|">Price</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </section>
+<button id="backbutton" class="btn btn-secondary" onclick="goBackOneLevel()">Back</button>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -1,11 +1,12 @@
 package pl.portfolio.webapp.nailsalon.services;
 
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import pl.portfolio.webapp.nailsalon.entities.ClientLoginEntity;
-import pl.portfolio.webapp.nailsalon.entities.dtos.ClientLoginEntityDto;
+import pl.portfolio.webapp.nailsalon.entities.dtos.ClientCredentialsDto;
+import pl.portfolio.webapp.nailsalon.mappers.ClientToDtoMapper;
 import pl.portfolio.webapp.nailsalon.repositories.ClientLoginEntityRepository;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -16,11 +17,12 @@ public class ClientLoginService {
         this.clientLoginEntityRepository = clientLoginEntityRepository;
     }
 
-    public Optional<ClientLoginEntity> findCredentialsByEmail(String email) {
-        return clientLoginEntityRepository.findByEmailIgnoreCase(email);
+    public ClientCredentialsDto findCredentialsByEmail(String email) {
+        return ClientToDtoMapper.MapCredentialsToDto(clientLoginEntityRepository.findByEmailIgnoreCase(email)
+                .orElseThrow(() -> new UsernameNotFoundException("no user found")));
     }
     
-    public Optional<ClientLoginEntity> findConstantID() {
-        return clientLoginEntityRepository.findById(1L);
+    public Optional<ClientLoginEntity> findConstantID(Long id) {
+        return clientLoginEntityRepository.findById(id);
     }
 }

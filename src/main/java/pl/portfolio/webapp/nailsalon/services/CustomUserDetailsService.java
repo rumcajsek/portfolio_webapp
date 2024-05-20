@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import pl.portfolio.webapp.nailsalon.entities.ClientLoginEntity;
 import pl.portfolio.webapp.nailsalon.entities.ClientUserRole;
+import pl.portfolio.webapp.nailsalon.entities.dtos.ClientCredentialsDto;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
@@ -18,17 +19,14 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return clientLoginService.findCredentialsByEmail(username)
-                .map(this::createUserDetails)
-                .orElseThrow(() -> new UsernameNotFoundException("no user found"));
+        return createUserDetails(clientLoginService.findCredentialsByEmail(username));
     }
 
-    private UserDetails createUserDetails(ClientLoginEntity credentials) {
+    private UserDetails createUserDetails(ClientCredentialsDto credentials) {
         return User.builder()
-                .username(credentials.getClientData().getName())
+                .username(credentials.getName() + " " + credentials.getSurname())
                 .password(credentials.getPassword())
-                .roles(credentials.getUserRoleSet().stream()
-                        .map(ClientUserRole::getName)
+                .roles(credentials.getUserRoles()
                         .toArray(String[]::new))
                 .build();
     }

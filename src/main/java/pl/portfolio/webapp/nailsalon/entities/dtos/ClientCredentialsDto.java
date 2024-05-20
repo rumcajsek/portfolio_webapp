@@ -9,13 +9,11 @@ import java.util.Set;
 
 @Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class FullClientDataDto {
-    private Long client_id;
+@AllArgsConstructor
+public class ClientCredentialsDto {
     private String name;
     private String surname;
-    private Long login_data_id;
     private String email;
     private String password;
     private Set<String> userRoles;

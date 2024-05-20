@@ -16,3 +16,9 @@ INSERT INTO client_to_user_role(client_login_entity_set_id, user_role_set_id) VA
 INSERT INTO client_to_user_role(client_login_entity_set_id, user_role_set_id) VALUES ((SELECT cld.id FROM client_login_data cld WHERE cld.email='ania.kowalska@gmail.com'), (SELECT cur.id FROM client_user_role cur WHERE cur.name = 'USER'));
 INSERT INTO client_to_user_role(client_login_entity_set_id, user_role_set_id) VALUES ((SELECT cld.id FROM client_login_data cld WHERE cld.email='martanowak@gmail.com'), (SELECT cur.id FROM client_user_role cur WHERE cur.name = 'USER'));
 INSERT INTO client_to_user_role(client_login_entity_set_id, user_role_set_id) VALUES ((SELECT cld.id FROM client_login_data cld WHERE cld.email='anikacz@gmail.com'), (SELECT cur.id FROM client_user_role cur WHERE cur.name = 'USER'));
+
+INSERT INTO services(name, description, cost, duration) VALUES ('Usluga1', 'opis 1', 100.0, 1.5);
+INSERT INTO services(name, description, cost, duration) VALUES ('Usluga2', 'opis 2', 150.0, 2.5);
+INSERT INTO services(name, description, cost, duration) VALUES ('Usluga3', 'opis 3', 125.0, 2.0);
+INSERT INTO services(name, description, cost, duration) VALUES ('Usluga4', 'opis 4', 130.0, 3.0);
+INSERT INTO services(name, description, cost, duration) VALUES ('Usluga5', 'opis 5', 175.0, 1.0);
