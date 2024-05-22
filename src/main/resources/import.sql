@@ -22,3 +22,10 @@ INSERT INTO services(name, description, cost, duration) VALUES ('Usluga2', 'opis
 INSERT INTO services(name, description, cost, duration) VALUES ('Usluga3', 'opis 3', 125.0, 2.0);
 INSERT INTO services(name, description, cost, duration) VALUES ('Usluga4', 'opis 4', 130.0, 3.0);
 INSERT INTO services(name, description, cost, duration) VALUES ('Usluga5', 'opis 5', 175.0, 1.0);
+
+INSERT INTO appointments(client_id, service_id, date) VALUES(1, 1, CURRENT_TIMESTAMP);
+INSERT INTO appointments(client_id, service_id, date) VALUES(1, 2, CURRENT_TIMESTAMP);
+INSERT INTO appointments(client_id, service_id, date) VALUES(1, 3, CURRENT_TIMESTAMP);
+INSERT INTO appointments(client_id, service_id, date) VALUES(1, 4, CURRENT_TIMESTAMP);
+INSERT INTO appointments(client_id, service_id, date) VALUES(2, 1, CURRENT_TIMESTAMP);
+INSERT INTO appointments(client_id, service_id, date) VALUES(3, 1, CURRENT_TIMESTAMP);

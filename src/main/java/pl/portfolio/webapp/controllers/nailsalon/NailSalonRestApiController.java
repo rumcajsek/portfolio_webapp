@@ -6,8 +6,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.portfolio.webapp.nailsalon.entities.ClientLoginEntity;
 import pl.portfolio.webapp.nailsalon.entities.dtos.ClientCredentialsDto;
+import pl.portfolio.webapp.nailsalon.entities.dtos.ClientDataDto;
 import pl.portfolio.webapp.nailsalon.mappers.ClientToDtoMapper;
 import pl.portfolio.webapp.nailsalon.services.ClientLoginService;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping(path = "/projects/nailSalon/api",
@@ -29,8 +32,8 @@ public class NailSalonRestApiController {
     }
 
     @GetMapping("/getClient")
-    public ResponseEntity<String> getClientOfGivenId(@RequestParam(value="id") Long id) {
+    public ResponseEntity<?> getClientOfGivenId(@RequestParam(value="id") Long id) {
         ClientLoginEntity clientLoginEntity = clientLoginService.findConstantID(id).orElseThrow();
-        return ResponseEntity.ok().body(gson.toJson(ClientToDtoMapper.MapEntityToDto(clientLoginEntity)));
+        return ResponseEntity.ok(new ClientDataDto(clientLoginEntity));
     }
 }
