@@ -1,5 +1,7 @@
 package pl.portfolio.webapp.nailsalon.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
@@ -21,17 +23,21 @@ public class ClientLoginEntity implements Serializable {
     private Long id;
     private String email;
     private String password;
+
     @OneToOne(cascade = CascadeType.REMOVE,
-            fetch = FetchType.EAGER)
+            fetch = FetchType.LAZY)
     @ToString.Exclude
+    @JsonBackReference
     private ClientEntity clientData;
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(
             name = "client_to_user_role",
             joinColumns = @JoinColumn(table = "client_login_data", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(table = "client_user_role", referencedColumnName = "id")
     )
     @ToString.Exclude
+    @JsonManagedReference
     private Set<ClientUserRole> userRoleSet;
 
     public ClientLoginEntity(String email, String password) {

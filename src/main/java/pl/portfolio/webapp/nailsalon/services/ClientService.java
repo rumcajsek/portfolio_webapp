@@ -35,6 +35,10 @@ public class ClientService {
         return clientLoginEntityRepository.findAll();
     }
 
+    public ClientLoginEntity getClientById(Long id) {
+        return clientLoginEntityRepository.findById(id).orElseThrow();
+    }
+
     @Transactional
     public Long addClientFullData(@NotNull ClientToAddDto clientToAddDto) {
         ClientEntity clientEntity = new ClientEntity(

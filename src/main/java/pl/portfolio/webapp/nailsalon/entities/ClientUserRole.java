@@ -1,5 +1,6 @@
 package pl.portfolio.webapp.nailsalon.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
@@ -21,8 +22,10 @@ public class ClientUserRole implements Serializable {
     private Long id;
     private String name;
     private String description;
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "userRoleSet", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "userRoleSet", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @ToString.Exclude
+    @JsonBackReference
     private Set<ClientLoginEntity> clientLoginEntitySet;
 
     public ClientUserRole(String name, String description) {

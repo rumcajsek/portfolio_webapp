@@ -1,11 +1,14 @@
 package pl.portfolio.webapp.nailsalon.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -20,6 +23,13 @@ public class ClientEntity implements Serializable {
     private Long id;
     private String name;
     private String surname;
+
+    @OneToMany(mappedBy = "clientEntity",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
+    @ToString.Exclude
+    @JsonManagedReference
+    private Set<AppointmentEntity> appointmentEntitySet  = new HashSet<>();
 
     public ClientEntity(String name, String surname) {
         this.name = name;

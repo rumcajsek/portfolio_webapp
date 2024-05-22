@@ -1,10 +1,16 @@
 package pl.portfolio.webapp.nailsalon.services;
 
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import pl.portfolio.webapp.nailsalon.entities.AppointmentEntity;
+import pl.portfolio.webapp.nailsalon.entities.ClientEntity;
+import pl.portfolio.webapp.nailsalon.entities.ServicesEntity;
+import pl.portfolio.webapp.nailsalon.entities.dtos.AppointmentDto;
 import pl.portfolio.webapp.nailsalon.repositories.AppointmentEntityRepository;
+import pl.portfolio.webapp.nailsalon.repositories.ClientEntityRepository;
+import pl.portfolio.webapp.nailsalon.repositories.ServicesEntityRepository;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -15,10 +21,28 @@ import java.util.List;
 @Slf4j
 @Service
 public class AppointmentService {
-    public final AppointmentEntityRepository appointmentEntityRepository;
+    private final AppointmentEntityRepository appointmentEntityRepository;
+    private final ClientEntityRepository clientEntityRepository;
+    private final ServicesEntityRepository servicesEntityRepository;
 
-    public AppointmentService(AppointmentEntityRepository appointmentEntityRepository) {
+    public AppointmentService(AppointmentEntityRepository appointmentEntityRepository, ClientEntityRepository clientEntityRepository, ServicesEntityRepository servicesEntityRepository) {
         this.appointmentEntityRepository = appointmentEntityRepository;
+        this.clientEntityRepository = clientEntityRepository;
+        this.servicesEntityRepository = servicesEntityRepository;
+    }
+
+    @Transactional
+    public Long saveAppointment(AppointmentDto appointmentDto) {
+        ClientEntity clientEntity = clientEntityRepository.findByNameAndSurname(appointmentDto.getClientEntityDto().getName(),
+                appointmentDto.getClientEntityDto().getSurname())
+                .orElseThrow();
+        ServicesEntity servicesEntity = servicesEntityRepository.findByName(appointmentDto.getServicesDto().getName())
+                .orElseThrow();
+        AppointmentEntity appointmentEntity = new AppointmentEntity();
+        appointmentEntity.setClientEntity(clientEntity);
+        appointmentEntity.setServicesEntity(servicesEntity);
+        appointmentEntity.setDate(appointmentDto.getDate());
+        return appointmentEntityRepository.save(appointmentEntity).getId();
     }
 
     public List<AppointmentEntity> getAppointmentList() {

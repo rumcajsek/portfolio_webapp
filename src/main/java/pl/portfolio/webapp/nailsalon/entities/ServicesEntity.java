@@ -1,10 +1,13 @@
 package pl.portfolio.webapp.nailsalon.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -21,6 +24,13 @@ public class ServicesEntity {
     private String description;
     private float duration;
     private float cost;
+
+    @OneToMany(mappedBy = "servicesEntity",
+                cascade = CascadeType.ALL,
+                fetch = FetchType.LAZY)
+    @ToString.Exclude
+    @JsonManagedReference
+    private Set<AppointmentEntity> appointments = new HashSet<>();
 
     @Override
     public final boolean equals(Object o) {
