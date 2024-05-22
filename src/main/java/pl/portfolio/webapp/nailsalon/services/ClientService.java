@@ -36,7 +36,7 @@ public class ClientService {
     }
 
     @Transactional
-    public void addClientFullData(@NotNull ClientToAddDto clientToAddDto) {
+    public Long addClientFullData(@NotNull ClientToAddDto clientToAddDto) {
         ClientEntity clientEntity = new ClientEntity(
                 clientToAddDto.getName(),
                 clientToAddDto.getSurname()
@@ -49,8 +49,9 @@ public class ClientService {
         clientLoginEntity.setUserRoleSet(Set.of(clientUserRoleRepository.findByName("USER").orElseThrow(NoUserRoleFoundException::new)));
         clientLoginEntity.setClientData(clientEntity);
 
-        clientLoginEntityRepository.save(clientLoginEntity);
+        Long savedClientId = clientLoginEntityRepository.save(clientLoginEntity).getId();
         clientEntityRepository.save(clientEntity);
+        return savedClientId;
     }
 
 }

@@ -47,6 +47,6 @@ function closeAppointmentModal() {
 }
 
 // Function to close the modal
-function closeAppointmentModal() {
+function closeScheduleModal() {
     document.getElementById('scheduleModal').style.display = 'none';
 }

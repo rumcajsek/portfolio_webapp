@@ -26,7 +26,8 @@ public class SecurityConfig {
                 .formLogin(login -> login
                         .loginPage("/login")
                         .permitAll()
-                        .successForwardUrl("/projects/nailSalon"))
+                        .successForwardUrl("/projects/nailSalon")
+                        )
                 .logout((logout) -> logout
                         //.addLogoutHandler(new HeaderWriterLogoutHandler(new ClearSiteDataHeaderWriter()))
                         .logoutSuccessUrl("/projects/nailSalon/logout")

@@ -1,6 +1,7 @@
 package pl.portfolio.webapp.nailsalon.services;
 
 import org.springframework.stereotype.Service;
+import pl.portfolio.webapp.nailsalon.entities.ServicesEntity;
 import pl.portfolio.webapp.nailsalon.entities.dtos.ServicesDto;
 import pl.portfolio.webapp.nailsalon.mappers.EntityDtoMapper;
 import pl.portfolio.webapp.nailsalon.repositories.ServicesEntityRepository;
@@ -27,5 +28,9 @@ public class ServicesService {
                     }
                 })
                 .toList();
+    }
+
+    public Long saveService(ServicesDto serviceToAdd) throws InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException {
+        return servicesEntityRepository.save(EntityDtoMapper.mapDtoToEntity(serviceToAdd, ServicesEntity.class)).getId();
     }
 }

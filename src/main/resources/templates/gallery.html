@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-      xmlns="http://www.w3.org/1999/html">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>Jakub Król - Portfolio</title>
     <!-- Required meta tags -->
@@ -15,16 +14,13 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
           crossorigin="anonymous">
-    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../static/styles/nailSalonStyle.css" th:href="@{/styles/nailSalonStyle.css}">
-    <base href="/projects/nailSalon/">
-
+    <base href="/projects/nailSalon/gallery">
 </head>
 <body>
 <nav id="mainNavbar" class="navbar navbar-dark navbar-expand-md py-0 fixed-top navbar-custom">
-    <a href="#" class="navbar-brand">PAZURKI NA CZARNO</a>
+    <a href="#" class="navbar-brand">JAKUB KRÓL</a>
     <button id="navbarToggler" class="navbar-toggler" data-toggle="collapse" data-target="#navLinks" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -45,45 +41,9 @@
         </ul>
     </div>
 </nav>
-<main role="main" class="container">
-    <section class="container-fluid px-5 py-3">
-        <div class="row align-items-center" sec:authorize="!isAuthenticated()">
-            <a class="col-10 col-md-6 col-xl-4 mx-auto justify-content-center text-center text-white link-button"
-               th:text="|Zaloguj się|" th:href="@{/login}"></a>
-        </div>
-        <div class="row align-items-center" sec:authorize="isAuthenticated()">
-            <span class="col-10 col-md-6 col-xl-4 mx-auto justify-content-center text-center text-white link-button">
-                <p class="text-white"
-                   style="white-space: pre"
-                   th:text="|Zalogowany jako ${#authentication.getName()}|" th:href="@{/logout}"></p>
-                <a class="undecorated-link text-white" th:href="@{/logout}" th:text="|Wyloguj się|"></a>
-            </span>
-        </div>
-        <div class="row align-items-center">
-            <a href="schedule" class="col-10 col-md-6 col-xl-4 mx-auto justify-content-center text-center text-white link-button">Umów wizytę</a>
-        </div>
-        <div class="row align-items-center">
-            <a href="clients" class="col-10 col-md-6 col-xl-4 mx-auto justify-content-center text-center text-white link-button">Klienci</a>
-        </div>
-        <div class="row align-items-center">
-            <a href="services" class="col-10 col-md-6 col-xl-4 mx-auto justify-content-center text-center text-white link-button">Usługi</a>
-        </div>
-        <div class="row align-items-center">
-            <a href="about" class="col-10 col-md-6 col-xl-4 mx-auto justify-content-center text-center text-white link-button">O mnie</a>
-        </div>
-        <div class="row align-items-center">
-            <a href="gallery" class="col-10 col-md-6 col-xl-4 mx-auto justify-content-center text-center text-white link-button">Galeria</a>
-        </div>
-        <div class="row align-items-center">
-            <a href="contact" class="col-10 col-md-6 col-xl-4 mx-auto justify-content-center text-center text-white link-button">Kontakt</a>
-        </div>
-    </section>
-</main>
-<footer id="footerElem" class="footer fixed-bottom">
-    <div class="container">
-        <span class="text-white">&#169; Pazurki na czarno 2024</span>
-    </div>
-</footer>
+<h1 class="text-center text-white">Gallery</h1>
+
+<button id="backbutton" class="btn btn-secondary" onclick="goBackOneLevel()">Back</button>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

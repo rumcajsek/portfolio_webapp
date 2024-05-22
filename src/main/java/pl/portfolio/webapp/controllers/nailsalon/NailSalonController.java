@@ -3,9 +3,11 @@ package pl.portfolio.webapp.controllers.nailsalon;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.portfolio.webapp.nailsalon.entities.AppointmentEntity;
@@ -17,6 +19,8 @@ import pl.portfolio.webapp.nailsalon.services.AppointmentService;
 import pl.portfolio.webapp.nailsalon.services.ClientService;
 import pl.portfolio.webapp.nailsalon.services.ServicesService;
 
+import java.lang.reflect.InvocationTargetException;
+import java.net.URI;
 import java.time.LocalDateTime;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
@@ -73,18 +77,23 @@ public class NailSalonController {
         return "clients";
     }
 
-    @GetMapping("/prices")
-    public String getNailSalonPricesPage(Model model) {
-        List<ServicesDto> servicesList = servicesService.findAllServices();
-        model.addAttribute("servicesList", servicesList);
-        return "prices";
-    }
-
     @GetMapping("/services")
     public String getNailSalonServicesPage(Model model) {
         List<ServicesDto> servicesList = servicesService.findAllServices();
+        model.addAttribute("serviceToAdd", new ServicesDto());
         model.addAttribute("servicesList", servicesList);
         return "services";
+    }
+
+    @PostMapping("/services/addService")
+    public ResponseEntity<?> addNewService(@ModelAttribute ServicesDto serviceToAdd) throws InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException {
+        Long id;
+        try {
+            id = servicesService.saveService(serviceToAdd);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Failed to create service: " + e.getMessage());
+        }
+        return ResponseEntity.created(URI.create("/projects/nailSalon/services/" + id)).build();
     }
 
     @GetMapping("/about")
@@ -95,6 +104,11 @@ public class NailSalonController {
     @GetMapping("/gallery")
     public String getNailSalonGalleryPage() {
         return "gallery";
+    }
+
+    @GetMapping("/contact")
+    public String getNailSalonContactPage() {
+        return "contact";
     }
 
     @GetMapping("/someRequest")

@@ -16,7 +16,8 @@
           crossorigin="anonymous">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../static/styles/nailSalonStyle.css" th:href="@{/styles/nailSalonStyle.css}">
-    <base href="/projects/nailSalon/prices">
+    <base href="/projects/nailSalon/services">
+    <script src="../static/scripts/nailSalonScripts.js"></script>
 </head>
 <body>
 <nav id="mainNavbar" class="navbar navbar-dark navbar-expand-md py-0 fixed-top navbar-custom">
@@ -41,7 +42,13 @@
         </ul>
     </div>
 </nav>
-<h1 class="text-center text-white">Prices</h1>
+<h1 class="text-center text-white">Services</h1>
+<section class="container-fluid px-5 py-3">
+    <div class="row align-items-center">
+        <a href="javascript:void(0)" data-toggle="modal" data-target="#addServiceModal"
+           class="col-10 col-md-6 col-xl-4 mx-auto justify-content-center text-center text-white link-button">Add Service</a>
+    </div>
+</section>
 <section class="container-fluid px-5 py-3">
     <div class="row align-items-center" th:if="${servicesList}">
         <table class="table table-striped">
@@ -63,15 +70,42 @@
 </section>
 <button id="backbutton" class="btn btn-secondary" onclick="goBackOneLevel()">Back</button>
 
+<div class="modal fade" id="addServiceModal" tabindex="-1" aria-labelledby="addServiceModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addServiceModalLabel">Add service</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <section class="container-fluid px-5 py-3">
+                    <form id="serviceForm" action="addService" th:object="${serviceToAdd}" method="POST">
+                        <input th:field="*{name}" type="text" name="name" placeholder="Name" required>
+                        <input th:field="*{description}" type="text" name="description" placeholder="Description" required>
+                        <input th:field="*{duration}" type="number" name="duration" placeholder="Duration in hours (eg. 1.5)" step="0.5" required>
+                        <input th:field="*{cost}" type="number" name="cost" placeholder="price in PLN" step="0.5" required>
+                        <button type="submit">Submit</button>
+                    </form>
+                </section>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeServiceModal()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
 <script src="../static/scripts/mainScript.js" th:src="@{/scripts/mainScript.js}"></script>
+<script src="../static/scripts/nailSalonScripts.js" th:src="@{/scripts/nailSalonScripts.js}"></script>
 
 </body>
 </html>

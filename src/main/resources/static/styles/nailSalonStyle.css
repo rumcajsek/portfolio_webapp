@@ -69,3 +69,8 @@ body {
     margin-left: auto;
     margin-right: auto;
 }
+
+#footerElem {
+    background-color: hotpink;
+    opacity: 75%;
+}
